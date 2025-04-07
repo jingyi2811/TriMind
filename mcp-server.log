@@ -1,101 +1,68 @@
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T02:54:11.059Z"}
-{"level":"info","message":"DeepSeek client: failed","timestamp":"2025-03-20T02:54:11.060Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T02:56:17.515Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T02:56:17.515Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T02:56:38.972Z"}
-{"level":"info","message":"DeepSeek client: failed","timestamp":"2025-03-20T02:56:39.170Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T02:57:25.289Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T02:57:25.289Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T02:57:35.721Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T02:57:35.875Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T04:03:44.637Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:03:44.638Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:03:59.127Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T04:03:59.332Z"}
-{"level":"info","message":"Qwen client: failed","timestamp":"2025-03-20T04:03:59.332Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T04:07:50.067Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:07:50.068Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:08:00.714Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T04:08:01.175Z"}
-{"level":"info","message":"Qwen client: failed","timestamp":"2025-03-20T04:08:01.175Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T04:14:18.186Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:14:18.190Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:14:26.200Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T04:14:27.005Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T04:14:27.005Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T04:52:34.845Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:52:34.847Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:53:19.656Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T04:53:20.354Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T04:53:20.354Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T04:58:54.269Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:58:54.270Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T04:59:08.107Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T04:59:08.827Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T04:59:08.827Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T05:02:00.923Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T05:02:01.519Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T05:02:01.519Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T05:05:08.839Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T05:05:08.842Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T05:05:08.839Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T05:05:08.842Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T05:05:22.964Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T05:05:23.618Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T05:05:23.618Z"}
-{"level":"info","message":"Received SIGTERM, shutting down MCP server...","timestamp":"2025-03-20T06:09:37.436Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:09:37.437Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:18:42.777Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T06:18:44.248Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T06:18:44.248Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-03-20T06:18:44.248Z"}
-{"level":"info","message":"Received SIGTERM, shutting down MCP server...","timestamp":"2025-03-20T06:20:41.017Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:20:41.018Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:21:15.294Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T06:21:17.302Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T06:21:17.302Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-03-20T06:21:17.302Z"}
-{"level":"info","message":"Received SIGTERM, shutting down MCP server...","timestamp":"2025-03-20T06:25:51.941Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:25:51.942Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:26:23.926Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T06:26:25.562Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T06:26:25.562Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-03-20T06:26:25.562Z"}
-{"level":"info","message":"Received SIGTERM, shutting down MCP server...","timestamp":"2025-03-20T06:29:51.457Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:29:51.458Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:31:22.618Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T06:31:24.081Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T06:31:24.082Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-03-20T06:31:24.082Z"}
-{"level":"info","message":"Received SIGTERM, shutting down MCP server...","timestamp":"2025-03-20T06:33:20.301Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:33:20.302Z"}
-{"level":"info","message":"Received SIGTERM, shutting down MCP server...","timestamp":"2025-03-20T06:35:51.972Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:35:51.974Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T06:39:04.769Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:39:04.771Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:40:05.355Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T06:40:06.727Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T06:40:06.727Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-03-20T06:40:06.727Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T06:48:40.416Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:48:40.418Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:49:38.312Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T06:49:39.881Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T06:49:39.881Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-03-20T06:49:39.881Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T06:54:16.277Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:54:16.277Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T06:54:24.966Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T06:54:27.016Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T06:54:27.017Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-03-20T06:54:27.017Z"}
-{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-03-20T07:10:08.437Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T07:10:08.439Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-03-20T07:10:26.733Z"}
-{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-03-20T07:10:28.388Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-03-20T07:10:28.388Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-03-20T07:10:28.388Z"}
-{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T08:34:40.348Z"}
-{"level":"info","message":"DeepSeek client: failed","timestamp":"2025-04-07T08:34:41.978Z"}
-{"level":"info","message":"Qwen client: initialized","timestamp":"2025-04-07T08:34:41.978Z"}
-{"level":"info","message":"Claude client: initialized","timestamp":"2025-04-07T08:34:41.978Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T15:47:43.980Z"}
+{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-04-07T15:47:46.244Z"}
+{"level":"info","message":"Qwen client: initialized","timestamp":"2025-04-07T15:47:46.244Z"}
+{"level":"info","message":"Created data directory: /Users/jimmy/WebstormProjects/trimind/data","timestamp":"2025-04-07T15:47:46.244Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T15:47:53.899Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T15:48:34.005Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T15:48:58.199Z"}
+{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-04-07T15:49:40.824Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T15:49:40.825Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:02:06.451Z"}
+{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-04-07T16:02:07.205Z"}
+{"level":"info","message":"Qwen client: initialized","timestamp":"2025-04-07T16:02:07.205Z"}
+{"level":"info","message":"Created data directory: /Users/jimmy/WebstormProjects/trimind/data","timestamp":"2025-04-07T16:02:07.206Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:02:07.206Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:03:24.033Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:03:41.880Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:03:58.325Z"}
+{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-04-07T16:06:48.196Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:06:48.198Z"}
+{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-04-07T16:06:48.209Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:06:48.209Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:06:58.884Z"}
+{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-04-07T16:07:00.561Z"}
+{"level":"info","message":"Qwen client: initialized","timestamp":"2025-04-07T16:07:00.561Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:07:07.831Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:07:25.080Z"}
+{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-04-07T16:10:33.898Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:10:33.898Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:11:20.746Z"}
+{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-04-07T16:11:21.529Z"}
+{"level":"info","message":"Qwen client: initialized","timestamp":"2025-04-07T16:11:21.529Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:11:21.530Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:11:34.369Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:11:52.250Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:12:03.796Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:12:23.944Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:12:33.594Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:12:51.580Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:13:07.121Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:13:32.310Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:13:54.769Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:14:06.576Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:14:12.098Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:14:30.800Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:14:42.312Z"}
+{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-04-07T16:16:49.872Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:16:49.874Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:18:38.814Z"}
+{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-04-07T16:18:39.593Z"}
+{"level":"info","message":"Qwen client: initialized","timestamp":"2025-04-07T16:18:39.593Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:18:47.037Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:19:00.449Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:19:21.922Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:19:44.236Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:20:14.741Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:20:32.640Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:20:44.066Z"}
+{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-04-07T16:21:05.378Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:21:05.379Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-07T16:21:15.704Z"}
+{"level":"info","message":"DeepSeek client: initialized","timestamp":"2025-04-07T16:21:16.470Z"}
+{"level":"info","message":"Qwen client: initialized","timestamp":"2025-04-07T16:21:16.470Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:21:16.470Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:21:37.427Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:21:50.029Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:22:14.179Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:22:39.679Z"}
+{"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:23:00.505Z"}

@@ -158,18 +158,29 @@
   color: #555;
 }
 
-.modelSelect {
-  padding: 8px 12px;
-  border-radius: 5px;
+.improvedSelect {
+  padding: 10px 14px;
+  border-radius: 6px;
   border: 1px solid #d0d0d0;
   font-size: 14px;
   background-color: white;
   cursor: pointer;
-  outline: none;
+  width: 250px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.modelSelect:focus {
+.improvedSelect:hover, .improvedSelect:focus {
   border-color: #0070f3;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 113, 243, 0.15);
 }
 
 .inputForm {
@@ -272,9 +283,20 @@
     color: #e0e0e0;
   }
   
-  .modelSelect {
+  /* Dark mode for improved select */
+  .improvedSelect {
     background-color: #2a2a2a;
-    border-color: #3a3a3a;
-    color: #e0e0e0;
+    border-color: #444;
+    color: white;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  }
+  
+  .improvedSelect:hover, .improvedSelect:focus {
+    border-color: #0070f3;
+    box-shadow: 0 2px 4px rgba(0, 113, 243, 0.2);
   }
 }
+
+/* Removed custom dropdown component styles */
+
+

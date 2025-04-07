@@ -61,8 +61,10 @@ export async function initializeDeepSeekMCP(apiKey?: string): Promise<DeepSeekMC
     logger.info('DeepSeek MCP client initialized successfully');
     return client;
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    logger.error('Failed to initialize DeepSeek MCP client', { error: errorMessage });
+    // Log the error with more detail
+    logger.error('Failed to initialize DeepSeek MCP client', { 
+      error: error instanceof Error ? error : JSON.stringify(error, null, 2) // Log full error or stringified version
+    });
     return null;
   }
 }

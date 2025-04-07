@@ -12,7 +12,7 @@ import {
   closeDeepSeekClient,
   DeepSeekMCPClient,
   DeepSeekAPIError
-} from './mcp-deepseek';
+} from './api/mcp/mcp-deepseek';
 
 // Import Qwen MCP module for chat and completion APIs
 import {
@@ -21,14 +21,12 @@ import {
   closeQwenClient,
   QwenMCPClient,
   QwenAPIError
-} from './mcp-qwen';
+} from './api/mcp/mcp-qwen';
 
-// Import Claude MCP module for chat and completion APIs
-import {
-  initializeClaudeMCP,
-  getClaudeTools,
-  ClaudeMCPClient
-} from './mcp-claude';
+// Claude MCP module has been removed
+
+// Import the Gemini Thinking tool using the correct relative path
+import { geminiThinkingTool } from './api/mcp/mcp-gemini-thinking';
 
 // Create a logger
 const logger = createLogger({
@@ -49,7 +47,6 @@ export { DeepSeekAPIError, QwenAPIError };
 export interface MCPClient {
   deepseek: DeepSeekMCPClient | null; // DeepSeek client
   qwen: QwenMCPClient | null; // Qwen client
-  claude: ClaudeMCPClient | null; // Claude client
   tools: () => Promise<Record<string, Tool>>;
   close: () => Promise<void>;
 }
@@ -60,17 +57,14 @@ export async function initializeMCP(): Promise<MCPClient> {
   // Get environment variables
   const deepseekApiKey = process.env.DEEPSEEK_API_KEY;
   const qwenApiKey = process.env.QWEN_API_KEY;
-  const claudeApiKey = process.env.ANTHROPIC_API_KEY;
 
   // Initialize clients
   const deepseek = await initializeDeepSeekMCP(deepseekApiKey);
   const qwen = await initializeQwenMCP(qwenApiKey);
-  const claude = await initializeClaudeMCP(claudeApiKey);
 
   // Log initialization status
   logger.info(`DeepSeek client: ${deepseek ? 'initialized' : 'failed'}`);
   logger.info(`Qwen client: ${qwen ? 'initialized' : 'failed'}`);
-  logger.info(`Claude client: ${claude ? 'initialized' : 'failed'}`);
 
   // Create MCP client
   // Define the file tools
@@ -268,13 +262,11 @@ export async function initializeMCP(): Promise<MCPClient> {
   const client: MCPClient = {
     deepseek,
     qwen,
-    claude,
     tools: async () => {
       try {
         // Get tools from clients
         const deepseekTools = await getDeepSeekTools(deepseek);
         const qwenTools = await getQwenTools(qwen);
-        const claudeTools = await getClaudeTools(claude);
         
         // Add custom tools
         const customTools = {
@@ -282,11 +274,14 @@ export async function initializeMCP(): Promise<MCPClient> {
           read_file: readFileTool,
           write_file: writeFileTool,
           fetch_data: fetchDataTool,
+          [geminiThinkingTool.name]: geminiThinkingTool,
           ...deepseekTools,
-          ...qwenTools,
-          ...claudeTools
+          ...qwenTools
         };
         
+        // Log the keys of the final tools object before returning
+        logger.info(`[MCP-Server(API)] Registering tools: ${Object.keys(customTools).join(', ')}`);
+
         return customTools;
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);

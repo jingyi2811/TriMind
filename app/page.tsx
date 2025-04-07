@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import styles from "./page.module.css";
 import ReactMarkdown from 'react-markdown';
 
@@ -8,7 +8,22 @@ export default function Home() {
   const [inputText, setInputText] = useState('');
   const [messages, setMessages] = useState<Array<{ text: string; sender: 'user' | 'bot' }>>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedModel, setSelectedModel] = useState<'claude' | 'deepseek' | 'qwen' | 'qwen_direct'>('claude');
+  const [selectedModel, setSelectedModel] = useState<'claude' | 'deepseek' | 'qwen' | 'qwen_direct' | 'gemini_thinking'>('claude');
+
+  // Handle model change directly with state update
+  const handleModelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newValue = e.target.value as 'claude' | 'deepseek' | 'qwen' | 'qwen_direct' | 'gemini_thinking';
+    setSelectedModel(newValue);
+    console.log('Model updated to:', newValue);
+    
+    // Force the select element to update
+    setTimeout(() => {
+      const selectElement = document.getElementById('model-select') as HTMLSelectElement;
+      if (selectElement) {
+        selectElement.value = newValue;
+      }
+    }, 0);
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -75,17 +90,17 @@ export default function Home() {
             </div>
             <div className={styles.modelSelector}>
               <label htmlFor="model-select">Select AI Model:</label>
-              <select 
+              <select
                 id="model-select"
+                className={styles.improvedSelect}
                 value={selectedModel}
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => 
-                  setSelectedModel(e.target.value as 'claude' | 'deepseek' | 'qwen' | 'qwen_direct')}
-                className={styles.modelSelect}
+                onChange={handleModelChange}
               >
                 <option value="claude">Claude (Direct)</option>
-                <option value="deepseek">DeepSeek</option>
+                <option value="deepseek">DeepSeek (MCP)</option>
                 <option value="qwen">Qwen (MCP)</option>
                 <option value="qwen_direct">Qwen (Direct)</option>
+                <option value="gemini_thinking">Gemini Thinking (via MCP Tool)</option>
               </select>
             </div>
             <form onSubmit={handleSubmit} className={styles.inputForm}>
