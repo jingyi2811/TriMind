@@ -6,13 +6,10 @@
   --button-primary-hover: #383838;
   --button-secondary-hover: #f2f2f2;
 
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
   font-family: var(--font-geist-sans);
 }
 
@@ -24,145 +21,260 @@
 
     --button-primary-hover: #ccc;
     --button-secondary-hover: #1a1a1a;
+    background-color: #121212;
   }
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
-}
-
-.main ol {
-  font-family: var(--font-geist-mono);
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
-}
-
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
-}
-
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.ctas {
-  display: flex;
-  gap: 16px;
-}
-
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: none;
-  border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
+  align-items: center;
+  flex: 1;
+  padding: 20px;
 }
 
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
-}
-
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 158px;
-}
-
-.footer {
-  grid-row-start: 3;
+.chatContainer {
+  width: 100%;
+  max-width: 800px;
+  height: 80vh;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.footer a {
+.messagesContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 70%;
+  padding: 12px;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+
+.userMessage {
+  align-self: flex-end;
+  background-color: #0070f3;
+  color: white;
+}
+
+.botMessage {
+  align-self: flex-start;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Markdown styling */
+.botMessage h1,
+.botMessage h2,
+.botMessage h3,
+.botMessage h4,
+.botMessage h5,
+.botMessage h6 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+}
+
+.botMessage h1 {
+  font-size: 1.5em;
+}
+
+.botMessage h2 {
+  font-size: 1.3em;
+}
+
+.botMessage h3 {
+  font-size: 1.1em;
+}
+
+.botMessage p {
+  margin: 0.5em 0;
+}
+
+.botMessage ul,
+.botMessage ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+
+.botMessage li {
+  margin: 0.25em 0;
+}
+
+.botMessage code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.botMessage pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.5em;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+
+.botMessage pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.9em;
+  display: block;
+}
+
+.botMessage blockquote {
+  border-left: 4px solid #ddd;
+  margin: 0.5em 0;
+  padding-left: 1em;
+  font-style: italic;
+}
+
+.modelSelector {
   display: flex;
   align-items: center;
-  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #eaeaea;
+  gap: 10px;
+  background-color: #f9f9f9;
 }
 
-.footer img {
-  flex-shrink: 0;
+.modelSelector label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+.modelSelect {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #d0d0d0;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.modelSelect:focus {
+  border-color: #0070f3;
+}
+
+.inputForm {
+  display: flex;
+  padding: 16px;
+  border-top: 1px solid #eaeaea;
+  gap: 10px;
+}
+
+.inputField {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.inputField:focus {
+  border-color: #0070f3;
+}
+
+.submitButton {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
+  .submitButton:hover {
+    background-color: #0060df;
   }
 }
 
 @media (max-width: 600px) {
   .page {
-    padding: 32px;
-    padding-bottom: 80px;
+    padding: 16px;
   }
 
-  .main {
-    align-items: center;
+  .chatContainer {
+    height: 90vh;
   }
 
-  .main ol {
-    text-align: center;
+  .inputField {
+    padding: 8px 12px;
   }
 
-  .ctas {
-    flex-direction: column;
-  }
-
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
+  .submitButton {
     padding: 0 16px;
-  }
-
-  a.secondary {
-    min-width: auto;
-  }
-
-  .footer {
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    font-size: 14px;
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+  .chatContainer {
+    background-color: #1e1e1e;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .botMessage {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+  }
+  
+  /* Dark mode markdown styling */
+  .botMessage code {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .botMessage pre {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .botMessage blockquote {
+    border-left-color: #555;
+  }
+
+  .inputField {
+    background-color: #2a2a2a;
+    border-color: #3a3a3a;
+    color: #e0e0e0;
+  }
+
+  .inputForm {
+    border-top-color: #333;
+  }
+  
+  .modelSelector {
+    background-color: #252525;
+    border-top-color: #333;
+  }
+  
+  .modelSelector label {
+    color: #e0e0e0;
+  }
+  
+  .modelSelect {
+    background-color: #2a2a2a;
+    border-color: #3a3a3a;
+    color: #e0e0e0;
   }
 }

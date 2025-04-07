@@ -1,0 +1,91 @@
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T04:03:59.331Z"}
+{"level":"error","message":"Qwen API key not provided","timestamp":"2025-03-20T04:03:59.332Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T04:08:01.000Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T04:08:01.001Z"}
+{"error":"API connection test failed: getaddrinfo ENOTFOUND api.qwen.com","level":"error","message":"Failed to initialize Qwen MCP client","timestamp":"2025-03-20T04:08:01.175Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T04:14:26.389Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T04:14:26.389Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T04:14:27.005Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T04:14:27.005Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T04:14:27.006Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T04:14:27.798Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T04:14:31.755Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T04:14:33.250Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T04:45:04.904Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T04:45:12.177Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T04:45:20.910Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T04:45:44.098Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T04:53:19.803Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T04:53:19.803Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T04:53:20.354Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T04:53:20.354Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T04:53:42.300Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T04:53:44.709Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T04:53:54.915Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T04:53:56.502Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T04:54:02.163Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T04:54:04.694Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T04:59:08.261Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T04:59:08.261Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T04:59:08.827Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T04:59:08.827Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T05:00:00.315Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T05:00:11.293Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T05:02:01.063Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T05:02:01.063Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T05:02:01.519Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T05:02:01.519Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T05:02:01.520Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T05:02:04.037Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T05:05:23.109Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T05:05:23.109Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T05:05:23.618Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T05:05:23.618Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T05:05:48.080Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T05:05:50.319Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T06:18:42.933Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T06:18:42.933Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T06:18:43.533Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T06:18:43.533Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T06:21:15.454Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T06:21:15.455Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T06:21:16.123Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T06:21:16.124Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T06:26:24.076Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T06:26:24.076Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T06:26:24.696Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T06:26:24.696Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T06:31:22.806Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T06:31:22.806Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T06:31:23.320Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T06:31:23.320Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T06:31:24.082Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T06:31:29.514Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T06:40:05.493Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T06:40:05.493Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T06:40:05.921Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T06:40:05.922Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T06:40:06.727Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T06:40:14.011Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T06:49:38.458Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T06:49:38.458Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T06:49:39.060Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T06:49:39.060Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T06:49:39.882Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T06:49:46.639Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T06:54:25.110Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T06:54:25.110Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T06:54:25.617Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T06:54:25.617Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-plus","timestamp":"2025-03-20T06:54:27.018Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T06:54:32.765Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-03-20T07:10:26.906Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-03-20T07:10:26.906Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-03-20T07:10:27.465Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-03-20T07:10:27.465Z"}
+{"level":"info","message":"Executing qwen_chat_completion tool","model":"qwen-max","timestamp":"2025-03-20T07:10:28.389Z"}
+{"level":"info","message":"Qwen chat API request successful","timestamp":"2025-03-20T07:10:32.990Z"}
+{"level":"info","message":"Initializing Qwen MCP client...","timestamp":"2025-04-07T08:34:40.637Z"}
+{"level":"info","message":"Testing connection to Qwen API...","timestamp":"2025-04-07T08:34:40.637Z"}
+{"level":"info","message":"Connection to Qwen API successful","timestamp":"2025-04-07T08:34:41.300Z"}
+{"level":"info","message":"Qwen MCP client initialized successfully","timestamp":"2025-04-07T08:34:41.300Z"}

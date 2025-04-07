@@ -1,0 +1,45 @@
+{"level":"error","message":"DeepSeek API key not provided","timestamp":"2025-03-20T02:54:11.060Z"}
+{"error":"DeepSeek API error: [object Object]","level":"error","message":"Failed to initialize DeepSeek MCP client","timestamp":"2025-03-20T02:56:39.170Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T02:57:35.875Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T02:57:35.875Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T02:57:35.875Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T03:00:48.399Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T03:01:14.431Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T03:02:10.514Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T03:02:33.631Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T04:03:59.331Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T04:03:59.331Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T04:08:01.000Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T04:08:01.000Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T04:14:26.388Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T04:14:26.389Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T04:53:19.802Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T04:53:19.803Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T04:53:20.355Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T04:54:10.549Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T04:59:08.261Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T04:59:08.261Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T04:59:08.828Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T05:00:37.112Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T05:02:01.063Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T05:02:01.063Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T05:05:23.109Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T05:05:23.109Z"}
+{"level":"info","message":"Executing deepseek_chat_completion tool","model":"deepseek-chat","timestamp":"2025-03-20T05:05:23.619Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T06:18:42.932Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T06:18:42.933Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T06:21:15.454Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T06:21:15.454Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T06:26:24.076Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T06:26:24.076Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T06:31:22.806Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T06:31:22.806Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T06:40:05.492Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T06:40:05.493Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T06:49:38.458Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T06:49:38.458Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T06:54:25.110Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T06:54:25.110Z"}
+{"level":"info","message":"Connection to DeepSeek API established","models":["deepseek-chat","deepseek-reasoner"],"timestamp":"2025-03-20T07:10:26.905Z"}
+{"level":"info","message":"DeepSeek MCP client initialized successfully","timestamp":"2025-03-20T07:10:26.905Z"}
+{"error":"DeepSeek API error: [object Object]","level":"error","message":"Failed to initialize DeepSeek MCP client","timestamp":"2025-04-07T08:34:40.637Z"}
