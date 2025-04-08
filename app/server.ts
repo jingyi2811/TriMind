@@ -1,5 +1,4 @@
 import { Tool } from 'ai';
-import { z } from 'zod';
 import { createLogger, format, transports } from 'winston';
 import fs from 'fs';
 import path from 'path';
@@ -59,8 +58,9 @@ export async function initializeMCP(): Promise<MCPClient> {
   const qwenApiKey = process.env.QWEN_API_KEY;
 
   // Initialize clients
-  const deepseek = await initializeDeepSeekMCP(deepseekApiKey);
-  const qwen = await initializeQwenMCP(qwenApiKey);
+  // No need to pass API keys as the functions don't take parameters anymore
+  const deepseek = await initializeDeepSeekMCP();
+  const qwen = await initializeQwenMCP();
 
   // Log initialization status
   logger.info(`DeepSeek client: ${deepseek ? 'initialized' : 'failed'}`);
@@ -69,7 +69,7 @@ export async function initializeMCP(): Promise<MCPClient> {
   // Create MCP client
   // Define the file tools
   const dataDirectory = process.env.DATA_DIRECTORY || path.join(process.cwd(), 'data');
-  
+
   // Ensure data directory exists
   if (!fs.existsSync(dataDirectory)) {
     fs.mkdirSync(dataDirectory, { recursive: true });
@@ -123,20 +123,20 @@ export async function initializeMCP(): Promise<MCPClient> {
     },
     execute: async (params: { filename: string; encoding?: BufferEncoding }) => {
       logger.info('Executing read_file tool', { filename: params.filename });
-      
+
       try {
         const filePath = path.join(dataDirectory, params.filename);
-        
+
         // Security check to prevent path traversal
         if (!isPathSafe(filePath)) {
           throw new Error('Path traversal attempt detected');
         }
-        
+
         // Check if file exists
         if (!fs.existsSync(filePath)) {
           throw new Error(`File not found: ${params.filename}`);
         }
-        
+
         // Read file
         const content = fs.readFileSync(filePath, { encoding: params.encoding || 'utf8' });
         logger.info('File read successfully', { filename: params.filename });
@@ -175,21 +175,21 @@ export async function initializeMCP(): Promise<MCPClient> {
     },
     execute: async (params: { filename: string; content: string; encoding?: BufferEncoding }) => {
       logger.info('Executing write_file tool', { filename: params.filename });
-      
+
       try {
         const filePath = path.join(dataDirectory, params.filename);
-        
+
         // Security check to prevent path traversal
         if (!isPathSafe(filePath)) {
           throw new Error('Path traversal attempt detected');
         }
-        
+
         // Ensure directory exists
         const dirname = path.dirname(filePath);
         if (!fs.existsSync(dirname)) {
           fs.mkdirSync(dirname, { recursive: true });
         }
-        
+
         // Write file
         fs.writeFileSync(filePath, params.content, { encoding: params.encoding || 'utf8' });
         logger.info('File written successfully', { filename: params.filename });
@@ -232,14 +232,14 @@ export async function initializeMCP(): Promise<MCPClient> {
       },
       required: ['url']
     },
-    execute: async (params: { 
-      url: string; 
-      method?: string; 
-      headers?: Record<string, string>; 
-      data?: any; 
+    execute: async (params: {
+      url: string;
+      method?: string;
+      headers?: Record<string, string>;
+      data?: any;
     }) => {
       logger.info('Executing fetch_data tool', { url: params.url, method: params.method || 'GET' });
-      
+
       try {
         // Make request
         const response = await axios({
@@ -248,7 +248,7 @@ export async function initializeMCP(): Promise<MCPClient> {
           headers: params.headers || {},
           data: params.data
         });
-        
+
         logger.info('API request successful', { url: params.url, status: response.status });
         return JSON.stringify(response.data);
       } catch (error) {
@@ -267,7 +267,7 @@ export async function initializeMCP(): Promise<MCPClient> {
         // Get tools from clients
         const deepseekTools = await getDeepSeekTools(deepseek);
         const qwenTools = await getQwenTools(qwen);
-        
+
         // Add custom tools
         const customTools = {
           echo: echoTool,
@@ -278,7 +278,7 @@ export async function initializeMCP(): Promise<MCPClient> {
           ...deepseekTools,
           ...qwenTools
         };
-        
+
         // Log the keys of the final tools object before returning
         logger.info(`[MCP-Server(API)] Registering tools: ${Object.keys(customTools).join(', ')}`);
 
@@ -292,11 +292,12 @@ export async function initializeMCP(): Promise<MCPClient> {
     close: async () => {
       try {
         // Close clients
-        await Promise.all([
-          closeDeepSeekClient(deepseek),
-          closeQwenClient(qwen)
-          // Claude doesn't need explicit closing as it uses HTTP requests
-        ]);
+        // Handle potential null values properly
+        const closePromises = [];
+        if (deepseek) closePromises.push(closeDeepSeekClient(deepseek));
+        if (qwen) closePromises.push(closeQwenClient(qwen));
+        
+        await Promise.all(closePromises);
         logger.info('All MCP clients closed');
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);

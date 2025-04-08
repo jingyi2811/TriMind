@@ -148,81 +148,48 @@ function convertMCPResponse(response: Record<string, any>): Record<string, any> 
 
 /**
  * Execute the tool with MCP client
+ * @param toolName The name of the tool to execute
  * @param params The parameters to pass to the tool
  * @returns The response from the tool
  */
-async function executeThroughMCP(params: Record<string, any>): Promise<Record<string, any>> {
+async function executeThroughMCP(toolName: string, params: Record<string, any>): Promise<Record<string, any>> {
   try {
     const client = await initializeMCPClient();
     const tools = await client.tools();
     
     logger.debug('[MCP-GeminiThinking] Available tools:', Object.keys(tools));
-    // Try both naming conventions since we've made the server accept both
-    const toolNames = ['gemini_thinking', 'geminiThinking'];
-    logger.debug('[MCP-GeminiThinking] Looking for tool with names:', toolNames);
     
-    // Find the first available tool that matches one of our expected names
-    let geminiThinkingTool: any = null;
-    let availableName: string | null = null;
-    
-    for (const name of toolNames) {
-      if (tools[name]) {
-        geminiThinkingTool = tools[name];
-        availableName = name;
-        logger.debug(`[MCP-GeminiThinking] Found tool with name: ${name}`);
-        break;
-      }
+    // Check if the requested tool exists
+    if (!tools[toolName]) {
+      logger.error(`[MCP-GeminiThinking] Tool '${toolName}' not found in available tools`, { availableTools: Object.keys(tools) });
+      throw new Error(`Tool '${toolName}' not found. Available tools: ${Object.keys(tools).join(', ')}`);
     }
     
-    if (!geminiThinkingTool) {
-      logger.error('[MCP-GeminiThinking] Gemini thinking tool not found in available tools', { availableTools: Object.keys(tools) });
-      // Let the caller handle this error
-      throw new Error(`Gemini thinking tool not found. Available tools: ${Object.keys(tools).join(', ')}`);
-    }
+    logger.debug(`[MCP-GeminiThinking] Calling tool '${toolName}' with params:`, params);
     
-    const convertedParams = convertToolParams(params);
-    logger.debug('[MCP-GeminiThinking] Converted params:', convertedParams);
-    
-    // Use the proper method to call the tool
-    logger.debug(`[MCP-GeminiThinking] Calling tool '${availableName}'`);
-    
-    // Safely invoke the tool using type checking and different approaches
-    let response;
-    // Using type assertion to handle call function
+    // Using type assertion to handle different ways to call the tool
     const toolsAny = tools as any;
+    let response;
     
     if (typeof toolsAny.call === 'function') {
       // Try using the call method if available
-      if (availableName) {
-        response = await toolsAny.call(availableName, convertedParams);
-      } else {
-        throw new Error('No available tool name found');
-      }
-    } else if (typeof geminiThinkingTool === 'function') {
-      // Try direct invocation if it's a function
-      response = await (geminiThinkingTool as Function)(convertedParams);
-    } else if (availableName) {
-      // Last resort: try using bracket notation and apply
-      const toolFunc = (tools as any)[availableName];
-      if (typeof toolFunc === 'function') {
-        response = await toolFunc(convertedParams);
-      } else {
-        throw new Error(`Tool '${availableName}' exists but is not callable`);
-      }
+      response = await toolsAny.call(toolName, params);
     } else {
-      throw new Error('No matching tool found or tool is not callable');
+      // Try direct invocation
+      const toolFunc = (tools as any)[toolName];
+      if (typeof toolFunc === 'function') {
+        response = await toolFunc(params);
+      } else {
+        throw new Error(`Tool '${toolName}' exists but is not callable`);
+      }
     }
     
-    logger.debug('[MCP-GeminiThinking] Received response from tool', { response });
-
-    return convertMCPResponse(response);
+    logger.debug(`[MCP-GeminiThinking] Received response from tool '${toolName}'`, { response });
+    return response;
   } catch (error) {
-    // Log the error for debugging but create a new error with a more specific message
     const errorMessage = error instanceof Error ? error.message : String(error);
-    logger.error('[MCP-GeminiThinking] Error executing tool', { errorMessage });
-    
-    // Create a new error instead of rethrowing the caught one
-    throw new Error(`Failed to execute gemini_thinking tool: ${errorMessage}`);
+    logger.error(`[MCP-GeminiThinking] Error executing tool '${toolName}'`, { errorMessage });
+    throw new Error(`Failed to execute '${toolName}': ${errorMessage}`);
   }
 }
 
@@ -265,7 +232,15 @@ export const geminiThinkingTool: Tool = {
     }
 
     try {
-      const result = await executeThroughMCP(params);
+      // Convert params before sending to MCP
+      const convertedParams = convertToolParams(params);
+      logger.debug('[MCP-GeminiThinkingTool] Converted params:', convertedParams);
+      
+      // Call the gemini_thinking tool
+      const response = await executeThroughMCP('gemini_thinking', convertedParams);
+      
+      // Convert the response back to our expected format
+      const result = convertMCPResponse(response);
       logger.info('[MCP-GeminiThinkingTool] Successfully generated thought');
       return result;
     } catch (error) {

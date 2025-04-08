@@ -6,7 +6,7 @@ import type { MCPClient } from '../../server'; // Import the type from our serve
 // Make sure ANTHROPIC_API_KEY, DEEPSEEK_API_KEY, QWEN_API_KEY are in your .env.local file
 export async function POST(req: NextRequest) {
     try {
-        const { messages, model = 'claude' } = await req.json();
+        const { messages, model } = await req.json();
 
         if (!messages || !Array.isArray(messages) || messages.length === 0) {
             return new Response(JSON.stringify({ error: 'Invalid messages format' }), {

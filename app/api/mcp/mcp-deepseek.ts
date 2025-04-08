@@ -1,6 +1,19 @@
+import path from 'path';
 import { Tool } from 'ai';
-import { z } from 'zod';
-import axios from 'axios';
+
+/**
+ * Custom error class for DeepSeek API errors
+ */
+export class DeepSeekAPIError extends Error {
+  constructor(message: string, public readonly code?: string, public readonly details?: any) {
+    super(message);
+    this.name = 'DeepSeekAPIError';
+    // Maintain proper prototype chain in transpiled ES5
+    Object.setPrototypeOf(this, DeepSeekAPIError.prototype);
+  }
+}
+import { experimental_createMCPClient } from 'ai';
+import { Experimental_StdioMCPTransport } from 'ai/mcp-stdio';
 import { createLogger, format, transports } from 'winston';
 
 // Create a logger
@@ -16,86 +29,170 @@ const logger = createLogger({
   ]
 });
 
-// Custom error class for DeepSeek API errors
-export class DeepSeekAPIError extends Error {
-  statusCode?: number;
-  constructor(message: string, statusCode?: number) {
-    super(message);
-    this.name = 'DeepSeekAPIError';
-    this.statusCode = statusCode;
-  }
-}
+// Path to the Python script
+const DEEPSEEK_SERVER_SCRIPT = path.join(process.cwd(), 'app/api/mcp/deepseek_server.py');
+
+// Store a reference to the MCP client using type inference
+let mcpClient: Awaited<ReturnType<typeof experimental_createMCPClient>> | null = null;
+
+// Track whether we've registered cleanup handlers
+let cleanupHandlersRegistered = false;
 
 // DeepSeek MCP client type
 export interface DeepSeekMCPClient {
-  apiKey: string;
-  baseUrl: string;
   models: string[];
 }
 
 /**
- * Initialize the DeepSeek MCP client
- * @param apiKey DeepSeek API key
- * @returns DeepSeekMCPClient instance or null if initialization fails
+ * Initialize the MCP client for communication with the Python server
+ * @returns The MCP client instance
  */
-export async function initializeDeepSeekMCP(apiKey?: string): Promise<DeepSeekMCPClient | null> {
-  // Check if API key is provided
-  if (!apiKey) {
-    logger.error('DeepSeek API key not provided');
-    return null;
+async function initializeMCPClient() {
+  if (mcpClient) {
+    logger.debug('[MCP-DeepSeek] MCP client already initialized');
+    return mcpClient;
   }
 
+  logger.info('[MCP-DeepSeek] Initializing MCP client...');
   try {
-    // Initialize client
+    // Create transport for the Python script
+    const transport = new Experimental_StdioMCPTransport({
+      command: 'python',
+      args: [DEEPSEEK_SERVER_SCRIPT],
+      env: process.env as Record<string, string>,
+    });
+
+    // Create MCP client
+    mcpClient = await experimental_createMCPClient({
+      transport,
+      // Additional options if needed
+    });
+
+    if (!cleanupHandlersRegistered) {
+      // Register cleanup handlers for process exit
+      process.on('beforeExit', () => {
+        if (mcpClient) {
+          logger.info('[MCP-DeepSeek] Closing MCP client on process exit');
+          try {
+            mcpClient.close();
+          } catch (e) {
+            logger.error('[MCP-DeepSeek] Error closing client on exit', { error: e });
+          }
+          mcpClient = null;
+        }
+      });
+
+      // Also handle SIGINT and SIGTERM if running in Node.js
+      process.on('SIGINT', () => {
+        if (mcpClient) {
+          logger.info('[MCP-DeepSeek] Closing MCP client on SIGINT');
+          try {
+            mcpClient.close();
+          } catch (e) {
+            logger.error('[MCP-DeepSeek] Error closing client on SIGINT', { error: e });
+          }
+          mcpClient = null;
+          process.exit(0);
+        }
+      });
+
+      process.on('SIGTERM', () => {
+        if (mcpClient) {
+          logger.info('[MCP-DeepSeek] Closing MCP client on SIGTERM');
+          try {
+            mcpClient.close();
+          } catch (e) {
+            logger.error('[MCP-DeepSeek] Error closing client on SIGTERM', { error: e });
+          }
+          mcpClient = null;
+          process.exit(0);
+        }
+      });
+
+      cleanupHandlersRegistered = true;
+    }
+
+    logger.info('[MCP-DeepSeek] MCP client initialized successfully');
+    return mcpClient;
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error during MCP client initialization';
+    logger.error('[MCP-DeepSeek] Failed to initialize MCP client', { errorMessage });
+    throw new Error(`MCP Client Initialization Failed: ${errorMessage}`);
+  }
+}
+
+/**
+ * Initialize the DeepSeek MCP client
+ * @returns DeepSeekMCPClient instance or null if initialization fails
+ */
+export async function initializeDeepSeekMCP(): Promise<DeepSeekMCPClient | null> {
+  logger.info('[MCP-DeepSeek] Initializing DeepSeek MCP client...');
+
+  try {
+    // Create the client with available models
     const client: DeepSeekMCPClient = {
-      apiKey,
-      baseUrl: 'https://api.deepseek.com/v1',
       models: [
         'deepseek-chat',
         'deepseek-reasoner'
       ]
     };
 
-    // Test connection by making a simple request
-    await testConnection(client);
-    logger.info('DeepSeek MCP client initialized successfully');
+    // Initialize MCP client for stdio communication
+    await initializeMCPClient();
+    logger.info('[MCP-DeepSeek] DeepSeek MCP client initialized successfully');
+
     return client;
   } catch (error) {
-    // Log the error with more detail
-    logger.error('Failed to initialize DeepSeek MCP client', { 
-      error: error instanceof Error ? error : JSON.stringify(error, null, 2) // Log full error or stringified version
-    });
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    logger.error('[MCP-DeepSeek] Failed to initialize DeepSeek MCP client', { error: errorMessage });
     return null;
   }
 }
 
 /**
- * Test connection to DeepSeek API
- * @param client DeepSeek MCP client
+ * Execute a tool through the MCP client
+ * @param toolName Name of the tool to execute
+ * @param params Parameters to pass to the tool
+ * @returns Result from the tool
  */
-async function testConnection(client: DeepSeekMCPClient): Promise<void> {
+async function executeThroughMCP(toolName: string, params: Record<string, any>): Promise<Record<string, any>> {
   try {
-    const response = await axios.get(`${client.baseUrl}/models`, {
-      headers: {
-        'Authorization': `Bearer ${client.apiKey}`,
-        'Content-Type': 'application/json'
+    const client = await initializeMCPClient();
+    const tools = await client.tools();
+    
+    logger.debug('[MCP-DeepSeek] Available tools:', Object.keys(tools));
+    
+    // Check if the requested tool exists
+    if (!tools[toolName]) {
+      logger.error(`[MCP-DeepSeek] Tool '${toolName}' not found in available tools`, { availableTools: Object.keys(tools) });
+      throw new Error(`Tool '${toolName}' not found. Available tools: ${Object.keys(tools).join(', ')}`);
+    }
+    
+    logger.debug(`[MCP-DeepSeek] Calling tool '${toolName}' with params:`, params);
+    
+    // Using type assertion to handle different ways to call the tool
+    const toolsAny = tools as any;
+    let response;
+    
+    if (typeof toolsAny.call === 'function') {
+      // Try using the call method if available
+      response = await toolsAny.call(toolName, params);
+    } else {
+      // Try direct invocation
+      const toolFunc = (tools as any)[toolName];
+      if (typeof toolFunc === 'function') {
+        response = await toolFunc(params);
+      } else {
+        throw new Error(`Tool '${toolName}' exists but is not callable`);
       }
-    });
-    
-    // Update model list with available models from API
-    if (response.data && response.data.data) {
-      client.models = response.data.data.map((model: any) => model.id);
     }
     
-    logger.info('Connection to DeepSeek API established', { models: client.models });
+    logger.debug(`[MCP-DeepSeek] Received response from tool '${toolName}'`, { response });
+    return response;
   } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      throw new DeepSeekAPIError(
-        `DeepSeek API error: ${error.response.data.error || error.message}`,
-        error.response.status
-      );
-    }
-    throw new DeepSeekAPIError(`Failed to connect to DeepSeek API: ${error instanceof Error ? error.message : String(error)}`);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    logger.error(`[MCP-DeepSeek] Error executing tool '${toolName}'`, { errorMessage });
+    throw new Error(`Failed to execute '${toolName}': ${errorMessage}`);
   }
 }
 
@@ -193,10 +290,25 @@ export async function getDeepSeekTools(client: DeepSeekMCPClient | null): Promis
       try {
         const model = params.model || 'deepseek-chat';
         if (!client.models.includes(model)) {
-          throw new DeepSeekAPIError(`Invalid model: ${model}. Available models: ${client.models.join(', ')}`);
+          throw new Error(`Invalid model: ${model}. Available models: ${client.models.join(', ')}`);
         }
 
-        const requestBody: any = {
+        // Make the request through MCP
+        logger.info('[MCP-DeepSeek] Making chat completion request via MCP');
+        
+        // Define the type with all possible properties including response_format
+        type DeepSeekRequestParams = {
+          model: string;
+          messages: Array<{role: string; content: string; name?: string}>;
+          max_tokens: number;
+          temperature: number;
+          top_p: number;
+          frequency_penalty: number;
+          presence_penalty: number;
+          response_format?: { type: string };
+        };
+        
+        const requestParams: DeepSeekRequestParams = {
           model: model,
           messages: params.messages,
           max_tokens: params.max_tokens || 4096,
@@ -206,83 +318,56 @@ export async function getDeepSeekTools(client: DeepSeekMCPClient | null): Promis
           presence_penalty: params.presence_penalty || 0
         };
 
-        // Add response_format if JSON is requested
         if (params.json_response) {
-          requestBody.response_format = { type: 'json_object' };
+          requestParams.response_format = { type: 'json_object' };
         }
 
-        const response = await axios.post(
-          `${client.baseUrl}/chat/completions`,
-          requestBody,
-          {
-            headers: {
-              'Authorization': `Bearer ${client.apiKey}`,
-              'Content-Type': 'application/json'
-            }
-          }
-        );
+        const response = await executeThroughMCP('deepseek_chat', requestParams);
 
-        return response.data.choices[0].message.content;
+        // Process the response (already in the expected format from MCP)
+        logger.info('[MCP-DeepSeek] Successfully received response from DeepSeek via MCP');
+        return response;
       } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          throw new DeepSeekAPIError(
-            `DeepSeek API error: ${error.response.data.error || error.message}`,
-            error.response.status
-          );
-        }
-        throw new DeepSeekAPIError(`Failed to generate chat completion: ${error instanceof Error ? error.message : String(error)}`);
+        logger.error('[MCP-DeepSeek] Error in chat completion', { error: error instanceof Error ? error.message : String(error) });
+        throw new Error(`Chat completion failed: ${error instanceof Error ? error.message : String(error)}`);
       }
-    },
+    }
   };
 
-  // Tool for FIM (Fill-In-the-Middle) Completion
-  const fimCompletionTool: Tool = {
-    description: 'Generate text using DeepSeek FIM completion API',
+  // Tool for text completion using DeepSeek models
+  const textCompletionTool: Tool = {
+    description: 'Generate text completions using DeepSeek models',
     parameters: {
       type: 'object',
       properties: {
         model: {
           type: 'string',
-          description: 'DeepSeek model to use (must be deepseek-chat)',
-          enum: ['deepseek-chat'],
-          default: 'deepseek-chat'
+          description: 'DeepSeek model to use (e.g., deepseek-coder)',
+          enum: client.models,
+          default: 'deepseek-coder'
         },
         prompt: {
           type: 'string',
-          description: 'The prompt to generate completions from'
-        },
-        suffix: {
-          type: 'string',
-          description: 'The suffix that comes after the completion of inserted text'
+          description: 'The prompt to generate completions for'
         },
         max_tokens: {
           type: 'number',
           description: 'Maximum number of tokens to generate',
-          default: 1000
+          default: 2048
         },
         temperature: {
           type: 'number',
           description: 'Sampling temperature (0-2)',
-          default: 0.7
+          default: 0.8
         },
         top_p: {
           type: 'number',
-          description: 'Top-p sampling parameter (0-1)',
+          description: 'Top-p sampling parameter',
           default: 1
-        },
-        frequency_penalty: {
-          type: 'number',
-          description: 'Frequency penalty (-2 to 2)',
-          default: 0
-        },
-        presence_penalty: {
-          type: 'number',
-          description: 'Presence penalty (-2 to 2)',
-          default: 0
         },
         stop: {
           type: 'array',
-          description: 'Up to 16 sequences where the API will stop generating',
+          description: 'Sequences where the API will stop generating further tokens',
           items: {
             type: 'string'
           }
@@ -293,104 +378,63 @@ export async function getDeepSeekTools(client: DeepSeekMCPClient | null): Promis
     execute: async (params: {
       model?: string;
       prompt: string;
-      suffix?: string;
       max_tokens?: number;
       temperature?: number;
       top_p?: number;
-      frequency_penalty?: number;
-      presence_penalty?: number;
       stop?: string[];
     }) => {
-      logger.info('Executing deepseek_fim_completion tool');
+      logger.info('Executing deepseek_text_completion tool', { model: params.model || 'deepseek-coder' });
       
       try {
-        const requestBody: any = {
-          model: 'deepseek-chat', // FIM completion only supports deepseek-chat
+        const model = params.model || 'deepseek-coder';
+        if (!client.models.includes(model)) {
+          throw new Error(`Invalid model: ${model}. Available models: ${client.models.join(', ')}`);
+        }
+
+        // Make the request through MCP
+        logger.info('[MCP-DeepSeek] Making text completion request via MCP');
+        
+        const response = await executeThroughMCP('deepseek_text', {
+          model: params.model || 'deepseek-coder',
           prompt: params.prompt,
-          max_tokens: params.max_tokens || 1000,
-          temperature: params.temperature || 0.7,
+          max_tokens: params.max_tokens || 2048,
+          temperature: params.temperature || 0.8,
           top_p: params.top_p || 1,
-          frequency_penalty: params.frequency_penalty || 0,
-          presence_penalty: params.presence_penalty || 0
-        };
+          stop: params.stop || null
+        });
 
-        // Add optional parameters
-        if (params.suffix) requestBody.suffix = params.suffix;
-        if (params.stop) requestBody.stop = params.stop;
-
-        const response = await axios.post(
-          `${client.baseUrl}/completions`,
-          requestBody,
-          {
-            headers: {
-              'Authorization': `Bearer ${client.apiKey}`,
-              'Content-Type': 'application/json'
-            }
-          }
-        );
-
-        return response.data.choices[0].text;
+        // Process the response (already in the expected format from MCP)
+        logger.info('[MCP-DeepSeek] Successfully received response from DeepSeek via MCP');
+        return response;
       } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          throw new DeepSeekAPIError(
-            `DeepSeek API error: ${error.response.data.error || error.message}`,
-            error.response.status
-          );
-        }
-        throw new DeepSeekAPIError(`Failed to generate FIM completion: ${error instanceof Error ? error.message : String(error)}`);
+        logger.error('[MCP-DeepSeek] Error in text completion', { error: error instanceof Error ? error.message : String(error) });
+        throw new Error(`Text completion failed: ${error instanceof Error ? error.message : String(error)}`);
       }
-    },
-  };
-
-  // Tool for model information
-  const modelsInfoTool: Tool = {
-    description: 'Get information about available DeepSeek models',
-    parameters: {
-      type: 'object',
-      properties: {},
-      required: []
-    },
-    execute: async () => {
-      logger.info('Executing deepseek_models_info tool');
-      
-      try {
-        const response = await axios.get(
-          `${client.baseUrl}/models`,
-          {
-            headers: {
-              'Authorization': `Bearer ${client.apiKey}`,
-              'Content-Type': 'application/json'
-            }
-          }
-        );
-
-        return response.data;
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          throw new DeepSeekAPIError(
-            `DeepSeek API error: ${error.response.data.error || error.message}`,
-            error.response.status
-          );
-        }
-        throw new DeepSeekAPIError(`Failed to get models info: ${error instanceof Error ? error.message : String(error)}`);
-      }
-    },
+    }
   };
 
   return {
-    'deepseek_chat_completion': chatCompletionTool,
-    'deepseek_fim_completion': fimCompletionTool,
-    'deepseek_models_info': modelsInfoTool
+    deepseek_chat_completion: chatCompletionTool,
+    deepseek_text_completion: textCompletionTool,
   };
 }
 
 /**
  * Close DeepSeek MCP client
- * @param client DeepSeek MCP client
  */
-export async function closeDeepSeekClient(client: DeepSeekMCPClient | null): Promise<void> {
-  // No active connections to close, but we log for consistency
-  if (client) {
-    logger.info('DeepSeek MCP client closed');
+export async function closeDeepSeekClient(client?: DeepSeekMCPClient): Promise<void> {
+  if (!mcpClient) {
+    logger.debug('[MCP-DeepSeek] No MCP client to close');
+    return;
+  }
+  
+  logger.info('[MCP-DeepSeek] Closing DeepSeek MCP client');
+  try {
+    await mcpClient.close();
+    mcpClient = null;
+    logger.info('[MCP-DeepSeek] MCP client closed successfully');
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    logger.error('[MCP-DeepSeek] Error closing MCP client', { errorMessage });
   }
 }
