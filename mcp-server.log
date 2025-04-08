@@ -66,3 +66,7 @@
 {"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:22:14.179Z"}
 {"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:22:39.679Z"}
 {"level":"info","message":"[MCP-Server(API)] Registering tools: echo, read_file, write_file, fetch_data, gemini_thinking, deepseek_chat_completion, deepseek_fim_completion, deepseek_models_info, qwen_chat_completion, qwen_text_completion","timestamp":"2025-04-07T16:23:00.505Z"}
+{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-04-08T02:04:49.361Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-08T02:04:49.363Z"}
+{"level":"info","message":"Received SIGINT, shutting down MCP server...","timestamp":"2025-04-08T02:04:49.382Z"}
+{"level":"info","message":"Initializing MCP clients...","timestamp":"2025-04-08T02:04:49.382Z"}

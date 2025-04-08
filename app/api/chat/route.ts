@@ -28,9 +28,6 @@ export async function POST(req: NextRequest) {
                 return await handleQwenRequest(messages, mcpClient);
             case 'qwen_direct':
                 return await handleQwenDirectRequest(messages);
-            case 'gemini':
-                // Pass the initialized client to the handler
-                return await handleGeminiRequest(messages, mcpClient);
             case 'claude':
                 // TODO: Update handleClaudeDirectRequest to call MCP server if desired (instead of direct API)
                 return await handleClaudeDirectRequest(messages);
@@ -54,106 +51,6 @@ export async function POST(req: NextRequest) {
 }
 
 // --- Handler for Gemini (now via MCP) ---
-/**
- * Handles chat requests for the Gemini model via the custom MCP server.
- */
-async function handleGeminiRequest(
-    messages: Array<{ text: string; sender: 'user' | 'bot' }>,
-    client: MCPClient // Accept the client instance
-) {
-    const mcpServerUrl = process.env.MCP_SERVER_URL || 'http://localhost:3001';
-    const geminiEndpoint = `${mcpServerUrl}/api/mcp/gemini/chat`; // Target the specific Gemini MCP endpoint
-    const traceId = crypto.randomUUID(); // Generate a unique trace ID
-
-    if (messages.length === 0) {
-         return new Response(JSON.stringify({ error: 'Cannot process empty messages for Gemini Thinking Schema' }), {
-             status: 400,
-             headers: { 'Content-Type': 'application/json' },
-         });
-    }
-
-    // --- Prepare request body according to the Thinking Schema ---
-    // Derive query from the last message
-    const lastMessage = messages[messages.length - 1];
-    const query = lastMessage.text;
-
-    // Use messages before the last one as context/previous thoughts
-    const previousThoughts = messages.slice(0, -1);
-
-    // Construct the request body based on the schema
-    // For fields not directly derived from messages, we'll use defaults or null
-    // This structure should be refined based on actual UI input or state management if needed
-    const requestBody = {
-        query: query,
-        // context: "Optional additional context", // Example: Provide if available
-        // approach: "Optional suggested approach", // Example: Provide if available
-        previousThoughts: previousThoughts, // Send the chat history before the latest query
-        thought: "", // Assuming the MCP server/Gemini generates the first thought
-        next_thought_needed: true, // Default to needing more thoughts initially?
-        thought_number: 1, // Assuming this is the first thought request
-        total_thoughts: 1, // Initial estimate, MCP server might adjust
-        is_revision: false,
-        revises_thought: null,
-        branch_from_thought: null,
-        branch_id: null,
-        needs_more_thoughts: false, // Default unless indicated otherwise
-        // --- Add any other required fields from the schema with defaults ---
-    };
-    // ------------------------------------------------------------
-
-    try {
-        console.log(`[${traceId}] ⏱️ [GEMINI-MCP-THINK] Forwarding request to MCP server at ${geminiEndpoint}`);
-        console.log(`[${traceId}]   Request Body:`, JSON.stringify(requestBody, null, 2)); // Log the structured body
-        const startTime = performance.now();
-
-        // Assuming client.gemini refers to your custom MCP server setup
-        // We are calling it via HTTP fetch here, not directly via the SDK client object
-        console.log(`[${traceId}] 📞 Calling custom MCP Gemini endpoint: ${geminiEndpoint}`);
-        console.log(`[${traceId}] Request Body:`, JSON.stringify(requestBody, null, 2));
-        const response = await fetch(geminiEndpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-request-id': crypto.randomUUID()
-            },
-            // Send the structured request body
-            body: JSON.stringify(requestBody),
-        });
-
-        const endTime = performance.now();
-        console.log(`[${traceId}] ⏱️ [GEMINI-MCP-THINK] Received response from MCP server in ${(endTime - startTime).toFixed(2)}ms`);
-
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({ error: 'Failed to parse MCP error response' }));
-            console.error(`[${traceId}] Error response from Gemini MCP server:`, response.status, errorData);
-            // Return the error from the MCP server to the client
-            return new Response(JSON.stringify(errorData || { error: 'Unknown error from MCP server' }), {
-                status: response.status,
-                headers: { 'Content-Type': 'application/json' },
-            });
-        }
-
-        const data = await response.json();
-
-        // Assuming MCP server returns { reply: "..." } structure
-        if (!data || typeof data.reply !== 'string') {
-            console.error(`[${traceId}] Invalid response format from Gemini MCP server:`, data);
-            throw new Error('Invalid response format from Gemini MCP server');
-        }
-
-        // Forward the response from the MCP server
-        return new Response(JSON.stringify({ reply: data.reply }), {
-            headers: { 'Content-Type': 'application/json' }
-        });
-
-    } catch (error: unknown) {
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-        console.error(`[${traceId}] Error calling Gemini MCP Thinking endpoint:`, errorMessage, error);
-        return new Response(JSON.stringify({
-            reply: `Error communicating with Gemini Thinking service via MCP: ${errorMessage}`
-        }), { status: 500, headers: { 'Content-Type': 'application/json' } });
-    }
-}
 
 /**
  * Direct API call to Qwen using OpenAI-compatible endpoint

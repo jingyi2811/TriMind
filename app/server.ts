@@ -274,7 +274,7 @@ export async function initializeMCP(): Promise<MCPClient> {
           read_file: readFileTool,
           write_file: writeFileTool,
           fetch_data: fetchDataTool,
-          [geminiThinkingTool.name]: geminiThinkingTool,
+          geminiThinking: geminiThinkingTool,
           ...deepseekTools,
           ...qwenTools
         };
